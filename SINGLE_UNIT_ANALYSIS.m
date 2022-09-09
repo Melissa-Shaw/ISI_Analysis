@@ -39,7 +39,7 @@ for exp = [Batch1PFC Batch2PFC]
             end
             if sum(pre_raster) > 0 % if no firing in pre condition exclude neuron
                 plot_unit_ISI(pre_raster,post_raster);
-                count = count + 2;
+                count = count + 3;
             end
         end
 

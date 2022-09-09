@@ -45,7 +45,7 @@ for exp = [Batch1PFC Batch2PFC]
 
         % plot distributions of logISI across all units
         figure
-        T = tiledlayout(2,2);
+        T = tiledlayout(2,3);
         title(T,['Exp: ' num2str(exp) ' Solution: ' solution ' Num units: ' num2str(num_units)]);
         
         % plot histogram of preVpost logISI across all units
@@ -56,8 +56,16 @@ for exp = [Batch1PFC Batch2PFC]
         xlabel('logISI');
         ylabel('Count');
         
-        % plot scatter of preVpost logISI across all units
+        % plot pdf histogram of preVpost logISI across all units
         nexttile(2)
+        histogram(cat(2,pre_logISI{:}),nbins,'FaceColor','k','Normalization','pdf');
+        hold on
+        histogram(cat(2,post_logISI{:}),nbins,'FaceColor','r','Normalization','pdf');
+        xlabel('logISI');
+        ylabel('PDF');
+        
+        % plot scatter of preVpost logISI across all units
+        nexttile(3)
         scatter(cat(2,pre_spiketimes{:}),cat(2,pre_logISI{:}),'.');
         hold on
         scatter(cat(2,post_spiketimes{:}) + max(cat(2,pre_spiketimes{:})),cat(2,post_logISI{:}),'.');
@@ -67,10 +75,10 @@ for exp = [Batch1PFC Batch2PFC]
         
         
         % plot heatmaps of logISI
-        nexttile(3)
+        nexttile(4)
         heatmap(pre_distr,'Colormap',parula);
         title('Pre');
-        nexttile(4)
+        nexttile(5)
         heatmap(post_distr,'Colormap',parula);
         title('Post');
         
